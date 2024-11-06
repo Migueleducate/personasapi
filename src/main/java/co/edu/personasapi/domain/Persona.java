@@ -1,7 +1,6 @@
 package co.edu.personasapi.domain;
 
 import jakarta.persistence.*; 
- //Prueba 1
 @Entity 
 @Table(name = "personas") 
 public class Persona { 
