@@ -1,0 +1,118 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 11-11-2024 a las 08:47:41
+-- Versión del servidor: 10.4.32-MariaDB
+-- Versión de PHP: 8.2.12
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de datos: `backend`
+--
+CREATE DATABASE IF NOT EXISTS `backend` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `backend`;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `personas`
+--
+
+CREATE TABLE `personas` (
+  `id_p` int(11) NOT NULL,
+  `nombre_p` varchar(45) NOT NULL,
+  `apellido_p` varchar(45) NOT NULL,
+  `id_tp` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `personas`
+--
+
+INSERT INTO `personas` (`id_p`, `nombre_p`, `apellido_p`, `id_tp`) VALUES
+(101, 'Juan', 'Velásquez', 3),
+(102, 'Camilo', 'Pinilla', 4),
+(103, 'Alberto', 'Hernández ', 1),
+(104, 'Pedro', 'Pascal', 5),
+(105, 'Jaime', 'Mauzan', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tipo_persona`
+--
+
+CREATE TABLE `tipo_persona` (
+  `id_tp` int(11) NOT NULL,
+  `nombre_tp` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `tipo_persona`
+--
+
+INSERT INTO `tipo_persona` (`id_tp`, `nombre_tp`) VALUES
+(1, 'Rector'),
+(2, 'Administrativo'),
+(3, 'Docente'),
+(4, 'Seguridad'),
+(5, 'Estudiante');
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `personas`
+--
+ALTER TABLE `personas`
+  ADD PRIMARY KEY (`id_p`),
+  ADD KEY `fk_id_tp_idx` (`id_tp`);
+
+--
+-- Indices de la tabla `tipo_persona`
+--
+ALTER TABLE `tipo_persona`
+  ADD PRIMARY KEY (`id_tp`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `personas`
+--
+ALTER TABLE `personas`
+  MODIFY `id_p` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
+
+--
+-- AUTO_INCREMENT de la tabla `tipo_persona`
+--
+ALTER TABLE `tipo_persona`
+  MODIFY `id_tp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `personas`
+--
+ALTER TABLE `personas`
+  ADD CONSTRAINT `fk_id_tp` FOREIGN KEY (`id_tp`) REFERENCES `tipo_persona` (`id_tp`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
